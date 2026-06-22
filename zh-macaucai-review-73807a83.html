@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澳门彩 · 信息卡片</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8f5f0;
+            font-family: 'Georgia', 'Noto Serif SC', 'Times New Roman', serif;
+            color: #2c2b28;
+            line-height: 1.7;
+            padding: 2rem 1.5rem;
+        }
+
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fffcf8;
+            padding: 2.5rem 2rem;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        /* hero 卡片 */
+        .hero-card {
+            background: #f3ede4;
+            border-radius: 24px;
+            padding: 2rem 1.8rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .hero-card::before {
+            content: "✦";
+            font-size: 2rem;
+            color: #b89b7a;
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            opacity: 0.4;
+        }
+
+        .hero-card h1 {
+            font-size: 1.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            color: #3e3a36;
+            border-left: 4px solid #c8b297;
+            padding-left: 1rem;
+        }
+
+        .hero-card p {
+            font-size: 1rem;
+            color: #4e4943;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-card .sub {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #7f766c;
+        }
+
+        /* 提示框 */
+        .notice-box {
+            background: #f6f0ea;
+            border-left: 6px solid #cbb59e;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            color: #4f4942;
+        }
+
+        .notice-box strong {
+            color: #7b6b5b;
+        }
+
+        /* 卡片排列 */
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card-item {
+            flex: 1 1 180px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.5rem 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #ece6de;
+            transition: box-shadow 0.2s;
+        }
+
+        .card-item:hover {
+            box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+        }
+
+        .card-item h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #5b5147;
+            border-bottom: 1px dashed #ddd6cc;
+            padding-bottom: 0.3rem;
+        }
+
+        .card-item p {
+            font-size: 0.9rem;
+            color: #5f5951;
+        }
+
+        .card-item .emoji-tag {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        /* 引用块 */
+        blockquote {
+            background: #f5f0ea;
+            padding: 1.2rem 1.8rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            font-style: normal;
+            color: #4f4a43;
+            border: 1px solid #e2d9cf;
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.7);
+        }
+
+        blockquote p {
+            margin-bottom: 0.5rem;
+        }
+
+        blockquote cite {
+            display: block;
+            text-align: right;
+            font-size: 0.85rem;
+            color: #8d847a;
+            margin-top: 0.4rem;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #faf7f2;
+            padding: 1.5rem 1.8rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 1px solid #e8e0d5;
+        }
+
+        .link-paragraph a {
+            color: #7e6b58;
+            text-decoration: none;
+            border-bottom: 1px solid #cbb59e;
+            font-weight: 500;
+            transition: background 0.15s;
+        }
+
+        .link-paragraph a:hover {
+            background: #ece2d6;
+        }
+
+        /* 适合人群列表 */
+        .audience-list {
+            list-style: none;
+            margin: 1.8rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .audience-list li {
+            background: #efe9e0;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #4b453e;
+            border: 1px solid #dcd3c7;
+        }
+
+        /* FAQ 摘要 */
+        .faq-mini {
+            margin: 2.2rem 0 1rem;
+        }
+
+        .faq-mini details {
+            border-bottom: 1px solid #e5ddd2;
+            padding: 0.7rem 0;
+        }
+
+        .faq-mini details[open] {
+            padding-bottom: 0.9rem;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #4b443c;
+            cursor: pointer;
+            padding: 0.2rem 0;
+            font-size: 0.98rem;
+        }
+
+        .faq-mini details p {
+            font-size: 0.9rem;
+            color: #615a51;
+            padding: 0.4rem 1rem 0 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e5ddd2;
+            margin: 2rem 0;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #9a9085;
+            margin-top: 2rem;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 540px) {
+            body { padding: 1rem; }
+            .page { padding: 1.8rem 1.2rem; }
+            .hero-card h1 { font-size: 1.6rem; }
+            .card-grid { gap: 1rem; }
+            .card-item { flex: 1 1 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 卡片 -->
+    <div class="hero-card">
+        <h1>澳门彩 · 信息卡片</h1>
+        <p>一份温和的指引：帮助你快速识别这个网站能带来什么，又适合哪些人。</p>
+        <p class="sub">—— 没有喧哗的推销，只有安静的梳理。</p>
+    </div>
+
+    <!-- 提示框：用途说明 -->
+    <div class="notice-box">
+        <strong>💡 网站用途</strong><br>
+        如果你正在寻找与澳门彩相关的资讯、参考或背景内容，这个页面会帮你建立初步了解。<br>
+        它并非一个游戏平台，而是一个汇集信息与实用参考的站点。
+    </div>
+
+    <!-- 信息卡片区：用途卡片 -->
+    <div class="card-grid">
+        <div class="card-item">
+            <span class="emoji-tag">📚</span>
+            <h3>背景阅读</h3>
+            <p>提供澳门彩的规则摘要、发展脉络与常见名词解释，适合快速扫盲。</p>
+        </div>
+        <div class="card-item">
+            <span class="emoji-tag">🧭</span>
+            <h3>导航参考</h3>
+            <p>整理相关的术语、文化与历史细节，帮助你在信息海洋中找到方向。</p>
+        </div>
+        <div class="card-item">
+            <span class="emoji-tag">📋</span>
+            <h3>理性视角</h3>
+            <p>不带倾向地呈现澳门彩的轮廓，让每个人都能基于了解做出自己的判断。</p>
+        </div>
+    </div>
+
+    <!-- 适合人群 -->
+    <h2 style="font-size:1.2rem; font-weight:400; margin-top:1rem; color:#5a524a;">✦ 适合哪些人？</h2>
+    <ul class="audience-list">
+        <li>偶尔想了解澳门彩背景的普通读者</li>
+        <li>希望查阅术语与规则摘要的爱好者</li>
+        <li>寻找客观信息而非推销内容的人</li>
+        <li>想要一个安静、不浮躁的浏览体验</li>
+    </ul>
+
+    <!-- 自然链接段落 -->
+    <div class="link-paragraph">
+        <p>这个站点的核心，是围绕「澳门彩」这一主题展开的信息集合。如果你希望直接查看网站全貌，可以前往 <a href="https://zh-macaucai.com">澳门彩</a> 主页，那里有更完整的栏目与内容。无论是初次接触还是已有基础，都值得花几分钟感受一下它的编排风格。</p>
+    </div>
+
+    <!-- 引用块 / 感性描述 -->
+    <blockquote>
+        <p>“我们不想用闪烁的按钮催促任何人，只想把关于澳门彩的信息像摆上木桌的茶杯一样——干净、平稳、触手可及。”</p>
+        <cite>—— 站点编辑手记</cite>
+    </blockquote>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <h3 style="font-size:1.1rem; font-weight:400; margin-bottom:0.5rem; color:#5b5249;">❓ 常见疑问摘要</h3>
+        <details>
+            <summary>这个网站提供投注或预测吗？</summary>
+            <p>不提供。它只是一个信息参考站点，不涉及任何实时下注、预测或引导行为。内容以知识性为主。</p>
+        </details>
+        <details>
+            <summary>信息更新频率如何？</summary>
+            <p>根据行业与背景变化不定期更新，保持基础内容的准确与时效。不会用大量弹窗或推送打扰访客。</p>
+        </details>
+        <details>
+            <summary>需要注册或登录吗？</summary>
+            <p>不需要。整个网站的内容均为公开浏览，没有隐藏区域或强制注册环节。</p>
+        </details>
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+        澳门彩 · 信息卡片版 &nbsp;|&nbsp; 温和·克制·实用
+    </div>
+</div>
+</body>
+</html>
